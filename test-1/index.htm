@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        direction: rtl;
+      }
+
+      main {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        margin-top: -40px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 20px;
+      }
+
+      .dropdown-grid,
+      .button-container,
+      .info-container,
+      .form-container {
+        width: 100%;
+      }
+
+      .dropdown-grid {
+        display: flex;
+        gap: 30px;
+        margin-right: -200px;
+      }
+
+      .dropdown,
+      .button-container {
+        margin-top: 20px;
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+      .dropbtn,
+      .button {
+        background-color: #4caf50;
+        color: white;
+        padding: 15px 30px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        column-gap: 20px;
+        padding: 10px;
+        text-align: right;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: grid;
+      }
+
+      .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+      }
+
+      .arrow-down {
+        margin-left: 10px;
+      }
+
+      .persian-text {
+        margin-left: 10px;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end; /* تنظیم چیدمان برای دکمه‌ها به سمت راست */
+      }
+
+      .info-container {
+        margin-top: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: right;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .form-container {
+        width: 100%;
+        margin-top: 20px;
+        direction: rtl;
+      }
+
+      form {
+        margin-right: 5%; /* تنظیم مقدار مارجین به صورت درصدی */
+        max-width: 600px; /* محدود کردن عرض فرم در صفحات کوچکتر */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      label,
+      input {
+        width: 100% !important; /* عرض صد درصد برای پر کردن کامل عرض فرم */
+        box-sizing: border-box; /* جلوگیری از افزودن پدینگ و حاشیه به عرض فیلد ورودی */
+        margin-bottom: 10px; /* فاصله بین لیبل‌ها و فیلدهای ورودی */
+      }
+
+      button[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      /* Media Queries */
+      @media (max-width: 799px) {
+        .dropdown-grid {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .button-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        form {
+          margin-right: 0; /* حذف مارجین در صفحات با عرض کمتر از 800 پیکسل */
+        }
+
+        label,
+        input {
+          width: auto; /* بازگردانی عرض به حالت اولیه در صفحات با عرض کمتر از 800 پیکسل */
+        }
+      }
+
+      @media (min-width: 800px) {
+        .dropdown-grid {
+          flex-direction: row;
+        }
+
+        .dropdown-content {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="dropdown-grid" id="dropdown-container">
+          <div class="dropdown" id="dropdown1">
+            <button class="dropbtn persian-text">
+              توسعه دهنده فرانت <span class="arrow-down">&#9660;</span>
+            </button>
+            <div class="dropdown-content">
+              <a href="#" class="persian-text" onclick="selectCategory('html')"
+                >html</a
+              >
+              <a href="#" class="persian-text" onclick="selectCategory('css')"
+                >css</a
+              >
+              <a
+                href="#"
+                class="persian-text"
+                onclick="selectCategory('javascript')"
+                >javascript</a
+              >
+            </div>
+          </div>
+
+          <div class="dropdown" id="dropdown2">
+            <button class="dropbtn persian-text">
+              توسعه دهنده بک <span class="arrow-down">&#9660;</span>
+            </button>
+            <div class="dropdown-content">
+              <a href="#" class="persian-text" onclick="selectCategory('Java')"
+                >Java</a
+              >
+              <a
+                href="#"
+                class="persian-text"
+                onclick="selectCategory('Python')"
+                >Python</a
+              >
+              <a href="#" class="persian-text" onclick="selectCategory('C#')"
+                >C#</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button id="button1" class="button" onclick="selectLevel('حد مبتدی')">
+            حد مبتدی
+          </button>
+          <button id="button2" class="button" onclick="selectLevel('حد متوسط')">
+            حد متوسط
+          </button>
+          <button
+            id="button3"
+            class="button"
+            onclick="selectLevel('حد پیشرفته')"
+          >
+            حد پیشرفته
+          </button>
+          <button
+            id="submitBtn"
+            class="button"
+            onclick="storeData('ذخیره اطلاعات')"
+          >
+            ذخیره اطلاعات
+          </button>
+          <button
+            id="newSubmitBtn"
+            class="button"
+            onclick="displaySelectedInfo()"
+          >
+            نمایش اطلاعات بدست آمده
+          </button>
+        </div>
+
+        <div class="info-container">
+          <h2>اطلاعات انتخابی</h2>
+          <table id="selectedInfoTable">
+            <tr>
+              <th>شاخه</th>
+              <th>سطح</th>
+              <th>عملیات</th>
+            </tr>
+          </table>
+        </div>
+
+        <div class="form-container">
+          <h2>فرم ورود اطلاعات</h2>
+          <form onsubmit="submitForm(event)">
+            <label for="category">شاخه:</label>
+            <input type="text" id="category" name="category" readonly />
+
+            <label for="level">سطح:</label>
+            <input type="text" id="level" name="level" readonly />
+
+            <button type="submit">ارسال اطلاعات</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      var selectedCategory = "";
+      var selectedLevel = "";
+      var storedInfo = [];
+
+      function selectCategory(category) {
+        selectedCategory = category;
+        document.getElementById("category").value = category;
+      }
+
+      function selectLevel(level) {
+        selectedLevel = level;
+        document.getElementById("level").value = level;
+      }
+
+      function storeData(action) {
+        storedInfo.push({
+          category: selectedCategory,
+          level: selectedLevel,
+          action: action,
+        });
+      }
+
+      function displaySelectedInfo() {
+        var table = document.getElementById("selectedInfoTable");
+        for (var i = 0; i < storedInfo.length; i++) {
+          var row = table.insertRow(-1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          cell1.textContent = storedInfo[i].category;
+          cell2.textContent = storedInfo[i].level;
+          cell3.textContent = storedInfo[i].action;
+        }
+      }
+
+      function submitForm(event) {
+        event.preventDefault();
+        alert("اطلاعات با موفقیت ارسال شد!");
+      }
+    </script>
+  </body>
+</html>

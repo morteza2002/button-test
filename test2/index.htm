@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+     body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.info-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 50px;
+    width: 70%;
+    max-width: 600px;
+}
+
+h2 {
+    color: #333;
+}
+
+#selectedInfoTable {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#selectedInfoTable th,
+#selectedInfoTable td {
+    border: 1px solid #dddddd;
+    padding: 12px;
+    text-align: center;
+}
+
+#selectedInfoTable th {
+    background-color: #f2f2f2;
+}
+
+.dropdown-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.dropdown {
+    flex: 1 1 auto;
+    position: relative;
+}
+
+.dropbtn {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #45a049;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #45a049;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row; /* تغییر در اینجا */
+    align-items: center; /* اضافه شده است */
+    justify-content: space-around; /* اضافه شده است */
+    margin-top: 20px;
+}
+
+.action-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.action-button:hover,
+.action-button:focus {
+    background-color: #45a049;
+}
+
+@media screen and (max-width: 800px) {
+    .info-container {
+        width: 90%;
+    }
+
+    .button-container {
+        flex-direction: column; /* تغییر در اینجا */
+        align-items: center; /* اضافه شده است */
+        justify-content: flex-start; /* اضافه شده است */
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .info-container {
+        width: 95%;
+    }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="info-container">
+      <h2>سفارش غذا</h2>
+      <table id="selectedInfoTable">
+        <tr>
+          <th>نوع غذا</th>
+          <th>قیمت</th>
+        </tr>
+        <!-- اطلاعات جدول را اینجا قرار دهید -->
+      </table>
+    </div>
+    <div class="dropdown-grid" id="dropdown-container">
+      <div class="dropdown" id="dropdown1">
+        <button class="dropbtn persian-text">
+          غذای ایرانی <span class="arrow-down">&#9660;</span>
+        </button>
+        <div class="dropdown-content">
+          <a href="#" class="persian-text" onclick="selectCategory('کباب')"
+            >کباب</a
+          >
+          <a href="#" class="persian-text" onclick="selectCategory('جوجه')"
+            >جوجه</a
+          >
+          <a href="#" class="persian-text" onclick="selectCategory('قیمه')"
+            >قیمه</a
+          >
+        </div>
+      </div>
+
+      <div class="dropdown" id="dropdown2">
+        <button class="dropbtn persian-text">
+          فست فودها <span class="arrow-down">&#9660;</span>
+        </button>
+        <div class="dropdown-content">
+          <a href="#" class="persian-text" onclick="selectCategory('پیتزا')"
+            >پیتزا</a
+          >
+          <a href="#" class="persian-text" onclick="selectCategory('ساندویچ')"
+            >ساندویچ</a
+          >
+          <a
+            href="#"
+            class="persian-text"
+            onclick="selectCategory('مرغ سوخاری')"
+            >مرغ سوخاری</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button class="action-button" onclick="calculateFoodPrice()">
+        محاسبه قیمت غذاها
+      </button>
+      <button class="action-button" onclick="increaseFoodCount()">
+        تعداد غذا
+      </button>
+      <button class="action-button" onclick="checkDrink()">نوشیدنی</button>
+      <button class="action-button" onclick="checkSubscription()">
+        کد اشتراک
+      </button>
+    </div>
+
+    <script>
+      function selectCategory(category) {
+        // در اینجا شما باید کد اضافه کنید تا انتخاب کاربر به جدول افزوده شود
+        // به عنوان مثال:
+        var table = document.getElementById("selectedInfoTable");
+        var row = table.insertRow(1); // افزودن ردیف به جدول
+        var cell1 = row.insertCell(0); // افزودن سلول اول
+        var cell2 = row.insertCell(1); // افزودن سلول دوم
+      
+        cell1.innerHTML = category; // تنظیم مقدار در سلول اول
+        // مقادیر دیگر را نیز به متناسب با نیاز خود تنظیم کنید
+      }
+
+      // افزوده شده: تعداد غذا
+      function increaseFoodCount() {
+        var table = document.getElementById("selectedInfoTable");
+        var rowCount = table.rows.length;
+
+        if (rowCount > 1) {
+          // اگر حداقل یک غذا انتخاب شده باشد
+          alert("تعداد غذاها: " + (rowCount - 1) + " عدد");
+        } else {
+          alert("هیچ غذایی انتخاب نشده است.");
+        }
+      }
+
+      // افزوده شده: نوشیدنی
+      function checkDrink() {
+        var answer = confirm("آیا نوشیدنی نیاز دارید؟");
+        if (answer) {
+          alert("شما نوشیدنی دارید.");
+        } else {
+          alert("شما نوشیدنی ندارید.");
+        }
+      }
+
+      // افزوده شده: کد اشتراک
+      function checkSubscription() {
+        var answer = confirm("آیا کد اشتراک دارید؟");
+        if (answer) {
+          alert("شما کد اشتراک دارید.");
+        } else {
+          alert("شما کد اشتراک ندارید.");
+        }
+      }
+
+      // افزوده شده: محاسبه قیمت غذاها
+      function calculateFoodPrice() {
+  var table = document.getElementById("selectedInfoTable");
+  var rowCount = table.rows.length;
+
+  // حذف ستون دوم (قیمت) از هر سطر
+  for (var i = 1; i < rowCount; i++) {
+    table.rows[i].deleteCell(1);
+  }
+
+  // حلقه برای گرفتن اطلاعات از هر ردیف جدول (بجز هدر)
+  for (var i = 1; i < rowCount; i++) {
+    var category = table.rows[i].cells[0].innerHTML;
+    var price = getRandomPrice(); // تابعی برای گرفتن قیمت تصادفی
+    var row = table.rows[i];
+
+    // افزودن سلول قیمت به ردیف
+    var cell2 = row.insertCell(1);
+    cell2.innerHTML = price;
+
+    alert("قیمت " + category + ": " + price + " تومان");
+  }
+}
+
+
+      // تابع برای گرفتن قیمت تصادفی
+      function getRandomPrice() {
+        return Math.floor(Math.random() * 9000) + 1000; // اعداد تصادفی بین 1000 تا 10000
+      }
+    </script>
+  </body>
+</html>
